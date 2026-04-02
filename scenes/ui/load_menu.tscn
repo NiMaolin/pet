@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/load_menu.gd" id="1_load"]
+
+[node name="LoadMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_load")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.2, 1)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "读取存档"
+horizontal_alignment = 1
+
+[node name="Slot1" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "存档 1 - 空"
+
+[node name="Slot2" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "存档 2 - 空"
+
+[node name="Slot3" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "存档 3 - 空"
+
+[node name="Back" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "返回"
+
+[connection signal="pressed" from="Panel/VBox/Slot1" to="." method="_on_slot1_pressed"]
+[connection signal="pressed" from="Panel/VBox/Slot2" to="." method="_on_slot2_pressed"]
+[connection signal="pressed" from="Panel/VBox/Slot3" to="." method="_on_slot3_pressed"]
+[connection signal="pressed" from="Panel/VBox/Back" to="." method="_on_back_pressed"]

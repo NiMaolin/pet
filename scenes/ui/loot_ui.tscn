@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/loot_ui.gd" id="1_loot"]
+
+[node name="LootUI" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_loot")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -290.0
+offset_right = 460.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleRow" type="HBoxContainer" parent="Panel/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBox/TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "📦 搜索物资箱"
+horizontal_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="Panel/MarginContainer/VBox/TitleRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(32, 32)
+text = "✕"
+
+[node name="SearchLabel" type="Label" parent="Panel/MarginContainer/VBox"]
+layout_mode = 2
+text = "准备搜索..."
+horizontal_alignment = 1
+
+[node name="SearchBar" type="ProgressBar" parent="Panel/MarginContainer/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 16)
+max_value = 100.0
+value = 0.0
+
+[node name="HBox" type="HBoxContainer" parent="Panel/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PlayerSide" type="VBoxContainer" parent="Panel/MarginContainer/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PlayerTitle" type="Label" parent="Panel/MarginContainer/VBox/HBox/PlayerSide"]
+layout_mode = 2
+text = "🎒 我的背包 (10×6)"
+horizontal_alignment = 1
+
+[node name="GridArea" type="Control" parent="Panel/MarginContainer/VBox/HBox/PlayerSide"]
+layout_mode = 2
+custom_minimum_size = Vector2(400, 240)
+
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/VBox/HBox"]
+layout_mode = 2
+
+[node name="LootSide" type="VBoxContainer" parent="Panel/MarginContainer/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LootTitle" type="Label" parent="Panel/MarginContainer/VBox/HBox/LootSide"]
+layout_mode = 2
+text = "📦 物资箱内容"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBox/HBox/LootSide"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(240, 160)
+horizontal_scroll_enabled = false
+
+[node name="GridArea" type="Control" parent="Panel/MarginContainer/VBox/HBox/LootSide/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3

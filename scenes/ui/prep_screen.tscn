@@ -1,0 +1,185 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/prep_screen.gd" id="1_prep"]
+[ext_resource type="PackedScene" path="res://scenes/ui/warehouse_ui.tscn" id="2_wh"]
+
+[node name="PrepScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_prep")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.15, 0.25, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 30.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+text = "准备界面"
+horizontal_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="ButtonPanel" type="PanelContainer" parent="Panel/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="Panel/VBox/HBox/ButtonPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Warehouse" type="Button" parent="Panel/VBox/HBox/ButtonPanel/VBox"]
+layout_mode = 2
+text = "仓库"
+
+[node name="PetDex" type="Button" parent="Panel/VBox/HBox/ButtonPanel/VBox"]
+layout_mode = 2
+text = "图鉴"
+
+[node name="Prepare" type="Button" parent="Panel/VBox/HBox/ButtonPanel/VBox"]
+layout_mode = 2
+text = "行前准备"
+
+[node name="InfoPanel" type="PanelContainer" parent="Panel/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="Panel/VBox/HBox/InfoPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PetCount" type="Label" parent="Panel/VBox/HBox/InfoPanel/VBox"]
+layout_mode = 2
+text = "已收集宠物: 0"
+
+[node name="ItemCount" type="Label" parent="Panel/VBox/HBox/InfoPanel/VBox"]
+layout_mode = 2
+text = "仓库物品: 0 种"
+
+[node name="PlayTime" type="Label" parent="Panel/VBox/HBox/InfoPanel/VBox"]
+layout_mode = 2
+text = "游戏时长: 00:00"
+
+[node name="EquippedPet" type="Label" parent="Panel/VBox/HBox/InfoPanel/VBox"]
+layout_mode = 2
+text = "已装备宠物: 无"
+
+[node name="HBox2" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Save" type="Button" parent="Panel/VBox/HBox2"]
+layout_mode = 2
+text = "保存游戏"
+
+[node name="MainMenu" type="Button" parent="Panel/VBox/HBox2"]
+layout_mode = 2
+text = "返回主菜单"
+
+[node name="SaveDialog" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="PanelContainer" parent="SaveDialog"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -200.0
+offset_right = 220.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="SaveDialog/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="SaveDialog/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleRow" type="HBoxContainer" parent="SaveDialog/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SaveDialog/Panel/Margin/VBox/TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "选择存档槽位"
+horizontal_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="SaveDialog/Panel/Margin/VBox/TitleRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(32, 32)
+text = "X"
+
+[node name="Slot0" type="PanelContainer" parent="SaveDialog/Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+
+[node name="SlotBtn0" type="Button" parent="SaveDialog/Panel/Margin/VBox/Slot0"]
+layout_mode = 2
+text = "槽位 1"
+
+[node name="Slot1" type="PanelContainer" parent="SaveDialog/Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+
+[node name="SlotBtn1" type="Button" parent="SaveDialog/Panel/Margin/VBox/Slot1"]
+layout_mode = 2
+text = "槽位 2"
+
+[node name="Slot2" type="PanelContainer" parent="SaveDialog/Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+
+[node name="SlotBtn2" type="Button" parent="SaveDialog/Panel/Margin/VBox/Slot2"]
+layout_mode = 2
+text = "槽位 3"
+
+[node name="StatusLabel" type="Label" parent="SaveDialog/Panel/Margin/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+text = ""
+
+[node name="WarehouseUI" parent="." instance=ExtResource("2_wh")]
