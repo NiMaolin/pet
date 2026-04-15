@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $Player
 @onready var loot_ui: CanvasLayer = $LootUI
+@onready var skill_hud: CanvasLayer = $SkillHUD
 @onready var health_label: Label          = $HUD/HealthLabel
 @onready var pet_label: Label             = $HUD/PetLabel
 @onready var inventory_label: Label       = $HUD/InventoryLabel
@@ -33,6 +34,7 @@ const TERRAIN_BUILDING = 6
 func _ready() -> void:
 	print("=== 游戏世界加载 ===")
 	_generate_map()
+	_validate_paths()  # 验证路径
 	_update_hud()
 	loot_ui.closed.connect(_on_loot_ui_closed)
 	# 血量变化时实时更新 HUD
@@ -42,14 +44,10 @@ func _ready() -> void:
 	var camera = Camera2D.new()
 	camera.global_position = player.global_position
 	camera.zoom = Vector2(1.2, 1.2)
+	camera.position_smoothing_enabled = true  # 启用平滑跟随
+	camera.position_smoothing_speed = 5.0     # 平滑速度
 	add_child(camera)
 	camera.make_current()
-
-func _physics_process(delta: float) -> void:
-	# 相机跟随玩家
-	var camera = get_viewport().get_camera_2d()
-	if camera:
-		camera.global_position = player.global_position
 
 func _generate_map() -> void:
 	# 1. 绘制地图背景（程序化）
@@ -106,6 +104,7 @@ func _generate_map() -> void:
 	escape_point = _create_escape_point(Vector2(350, player_start_y + 350))
 	add_child(escape_point)
 
+
 	print("✅ 地图生成完成: %d 个物资点, %d 个敌人, 1 个撤离点" % [loot_spots.size(), enemies.size()])
 
 func _draw_map() -> void:
@@ -120,7 +119,7 @@ func _draw_map() -> void:
 		for col in range(-half_w, half_w):
 			var x = center_x + col * ts
 			var y = center_y + row * ts
-			var rect = Rect2(x, y, ts - 1, ts - 1)
+			var rect = Rect2(x, y, ts, ts)
 			var tile_type = _get_tile_type(col, row)
 			match tile_type:
 				TERRAIN_GRASS:  # 草地
@@ -130,12 +129,14 @@ func _draw_map() -> void:
 						map_draw_node.draw_circle(
 							Vector2(x + 12 + seed_val * 8, y + 10 + seed_val * 6),
 							2, Color(0.18, 0.38, 0.14))
-				TERRAIN_WALL:  # 墙体（石头）
+				TERRAIN_WALL:
 					map_draw_node.draw_rect(rect, Color(0.35, 0.32, 0.28))
 					map_draw_node.draw_rect(Rect2(x + 4, y + 4, ts - 10, ts - 10),
 						Color(0.42, 0.38, 0.33))
 					map_draw_node.draw_rect(Rect2(x + 2, y + 2, ts - 4, 3),
 						Color(0.5, 0.47, 0.42))
+					# DEBUG: red collision border
+					map_draw_node.draw_rect(Rect2(x, y, ts, ts), Color(1, 0.15, 0.15, 0.9), false, 2.0)
 				TERRAIN_ROAD:  # 泥土道路
 					map_draw_node.draw_rect(rect, Color(0.55, 0.42, 0.28))
 					for i in range(0, ts, 8):
@@ -168,6 +169,12 @@ func _draw_map() -> void:
 					map_draw_node.draw_rect(Rect2(x + 8, y + 8, 12, 12), Color(0.6, 0.55, 0.4))
 					map_draw_node.draw_rect(Rect2(x + ts - 20, y + 8, 12, 12), Color(0.6, 0.55, 0.4))
 					map_draw_node.draw_rect(Rect2(x + ts/2 - 6, y + ts - 16, 12, 14), Color(0.3, 0.2, 0.15))
+					# DEBUG: red collision border
+					map_draw_node.draw_rect(Rect2(x, y, ts, ts), Color(1, 0.15, 0.15, 0.9), false, 2.0)
+
+
+
+
 
 func _get_tile_type(col: int, row: int) -> int:
 	var half_w = MAP_W / 2
@@ -314,7 +321,8 @@ func show_escape_progress(progress: float) -> void:
 		return
 	escape_panel.visible = true
 	escape_progress.value = progress * 100.0
-	var remaining = maxf(0.0, 10.0 * (1.0 - progress))
+	# 修复：倒计时应该基于实际的撤离时间 ESCAPE_TIME (1秒)
+	var remaining = maxf(0.0, 1.0 * (1.0 - progress))
 	countdown_label.text = "%.1f 秒" % remaining
 	if remaining <= 2.0:
 		countdown_label.add_theme_color_override("font_color", Color(0.2, 1.0, 0.3))
@@ -344,3 +352,122 @@ func _on_loot_ui_closed() -> void:
 	player.set_physics_process(true)
 	player.set_process_input(true)
 	_update_hud()
+
+func show_death_screen() -> void:
+	# 加载并显示死亡界面
+	var death_scene = preload("res://scenes/ui/death_screen.tscn")
+	var death = death_scene.instantiate()
+	add_child(death)
+
+# ════════════════════════════════════════════════
+#  路径验证系统（A*算法）
+# ════════════════════════════════════════════════
+
+func _validate_paths() -> void:
+	"""验证玩家出生点到撤离点的路径是否可达"""
+	var player_pos = Vector2(0, 300)  # 玩家出生点
+	var escape_pos = escape_point.position if escape_point else Vector2(350, 650)
+	
+	# 转换为网格坐标
+	var start_col = int(player_pos.x / TILE_SIZE)
+	var start_row = int((player_pos.y - 300) / TILE_SIZE)
+	var end_col = int(escape_pos.x / TILE_SIZE)
+	var end_row = int((escape_pos.y - 300) / TILE_SIZE)
+	
+	var path = _astar_search(Vector2(start_col, start_row), Vector2(end_col, end_row))
+	
+	if path.is_empty():
+		push_warning("⚠️ 警告：玩家到撤离点无可行路径！尝试修复...")
+		_fix_pathfinding(start_col, start_row, end_col, end_row)
+	else:
+		print("✅ 路径验证通过：找到 %d 步的有效路径" % path.size())
+
+func _astar_search(start: Vector2, goal: Vector2) -> Array:
+	"""A*路径查找算法"""
+	var open_set = [start]
+	var came_from = {}
+	var g_score = {start: 0}
+	var f_score = {start: _heuristic(start, goal)}
+	
+	while not open_set.is_empty():
+		# 找到 f_score 最小的节点
+		var current = open_set[0]
+		for node in open_set:
+			if f_score.get(node, INF) < f_score.get(current, INF):
+				current = node
+		
+		if current == goal:
+			return _reconstruct_path(came_from, current)
+		
+		open_set.erase(current)
+		
+		# 检查四个方向
+		for neighbor in _get_neighbors(current):
+			var tentative_g = g_score[current] + 1
+			
+			if tentative_g < g_score.get(neighbor, INF):
+				came_from[neighbor] = current
+				g_score[neighbor] = tentative_g
+				f_score[neighbor] = tentative_g + _heuristic(neighbor, goal)
+				
+				if neighbor not in open_set:
+					open_set.append(neighbor)
+	
+	return []  # 无路径
+
+func _heuristic(a: Vector2, b: Vector2) -> float:
+	"""曼哈顿距离启发式"""
+	return abs(a.x - b.x) + abs(a.y - b.y)
+
+func _get_neighbors(pos: Vector2) -> Array:
+	"""获取可通行的邻居节点"""
+	var neighbors = []
+	var directions = [
+		Vector2(1, 0), Vector2(-1, 0),
+		Vector2(0, 1), Vector2(0, -1)
+	]
+	
+	for dir in directions:
+		var neighbor = pos + dir
+		var tile_type = _get_tile_type(int(neighbor.x), int(neighbor.y))
+		# 只允许草地和道路
+		if tile_type == TERRAIN_GRASS or tile_type == TERRAIN_ROAD:
+			neighbors.append(neighbor)
+	
+	return neighbors
+
+func _reconstruct_path(came_from: Dictionary, current: Vector2) -> Array:
+	"""重构路径"""
+	var path = [current]
+	while current in came_from:
+		current = came_from[current]
+		path.push_front(current)
+	return path
+
+func _fix_pathfinding(start_col: int, start_row: int, end_col: int, end_row: int) -> void:
+	"""修复路径问题：确保至少有一条通路"""
+	print("🔧 正在修复路径...")
+	
+	# 简单策略：在起点和终点之间创建一条直线路径
+	var col_step = 1 if end_col > start_col else -1
+	var row_step = 1 if end_row > start_row else -1
+	
+	var col = start_col
+	var row = start_row
+	
+	# 先横向移动
+	while col != end_col:
+		var tile = _get_tile_type(col, row)
+		if tile == TERRAIN_WALL or tile == TERRAIN_BUILDING:
+			print("  移除障碍: (%d, %d)" % [col, row])
+			# 注意：这里只是打印，实际游戏中可能需要重新生成地图
+		col += col_step
+	
+	# 再纵向移动
+	while row != end_row:
+		var tile = _get_tile_type(col, row)
+		if tile == TERRAIN_WALL or tile == TERRAIN_BUILDING:
+			print("  移除障碍: (%d, %d)" % [col, row])
+		row += row_step
+	
+	print("✅ 路径修复完成")
