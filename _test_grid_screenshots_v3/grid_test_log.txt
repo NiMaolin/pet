@@ -1,0 +1,16 @@
+[21:12:05] Killed processes: [44060, 19220]
+[21:12:07] Godot started PID=50136
+[21:12:08] NEW Window found: 11078372
+[21:12:25] Screenshot: 01_game_world.png (1038x446) bright=39
+[21:12:25] Step 1: In game world OK
+[21:12:43] Screenshot: 02_loot_searched.png (1038x446) bright=39
+[21:12:43] Step 2: Loot box searched OK
+[21:12:55] Screenshot: 03_pickup_reopen.png (1038x446) bright=39
+[21:12:55] Step 3: Pickup/reopen OK
+[21:13:11] Screenshot: 04_final_verify.png (1038x446) bright=39
+[21:13:11] Step 4: Final verify OK
+[21:13:11] 
+[21:13:11] ============================================================
+[21:13:11] V3 TEST COMPLETE!
+[21:13:11] ============================================================
+[21:23:11] Done

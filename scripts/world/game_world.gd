@@ -138,8 +138,8 @@ func _draw_map() -> void:
 						Color(0.42, 0.38, 0.33))
 					map_draw_node.draw_rect(Rect2(x + 2, y + 2, ts - 4, 3),
 						Color(0.5, 0.47, 0.42))
-					# DEBUG: red collision border
-					map_draw_node.draw_rect(Rect2(x, y, ts, ts), Color(1, 0.15, 0.15, 0.9), false, 2.0)
+					# DEBUG: green collision border (aligned with collision shape, 64x64)
+					map_draw_node.draw_rect(Rect2(x, y, ts, ts), Color(0.15, 1, 0.15, 0.9), false, 2.0)
 				TERRAIN_ROAD:  # 泥土道路
 					map_draw_node.draw_rect(rect, Color(0.55, 0.42, 0.28))
 					for i in range(0, ts, 8):
@@ -172,8 +172,8 @@ func _draw_map() -> void:
 					map_draw_node.draw_rect(Rect2(x + 8, y + 8, 12, 12), Color(0.6, 0.55, 0.4))
 					map_draw_node.draw_rect(Rect2(x + ts - 20, y + 8, 12, 12), Color(0.6, 0.55, 0.4))
 					map_draw_node.draw_rect(Rect2(x + ts/2 - 6, y + ts - 16, 12, 14), Color(0.3, 0.2, 0.15))
-					# DEBUG: red collision border
-					map_draw_node.draw_rect(Rect2(x, y, ts, ts), Color(1, 0.15, 0.15, 0.9), false, 2.0)
+					# DEBUG: green collision border (aligned with collision shape, 64x64)
+					map_draw_node.draw_rect(Rect2(x, y, ts, ts), Color(0.15, 1, 0.15, 0.9), false, 2.0)
 
 
 

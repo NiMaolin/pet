@@ -26,7 +26,17 @@ func _ready() -> void:
 	add_to_group("player")
 	GameData.health_changed.connect(_on_health_changed)
 	_setup_animated_sprite()
+	_setup_collision()
 	print("✅ 玩家已初始化（精灵表动画版）")
+
+func _setup_collision() -> void:
+	# 玩家碰撞形状（略小于一个格子，防止卡墙）
+	var shape = CollisionShape2D.new()
+	var circle = CircleShape2D.new()
+	circle.radius = 12.0  # 比半个格子 (16) 小一点
+	shape.shape = circle
+	add_child(shape)
+	print("[Player] Collision: layer=%d, mask=%d, radius=%s" % [collision_layer, collision_mask, circle.radius])
 
 func _setup_animated_sprite() -> void:
 	# 移除旧的蓝色 ColorRect（让它不可见）
@@ -88,6 +98,11 @@ func _on_anim_finished() -> void:
 	if anim_sprite and anim_sprite.animation == "attack":
 		is_attacking = false
 		anim_sprite.play("idle")
+
+func _draw() -> void:
+	# DEBUG: 绘制玩家碰撞区域（蓝色圆圈，radius=12）
+	draw_circle(Vector2.ZERO, 12, Color(0.2, 0.5, 1.0, 0.4), true)  # 填充
+	draw_arc(Vector2.ZERO, 12, 0, TAU, 32, Color(0.2, 0.7, 1.0, 0.9), 2.0)  # 边框
 
 func _physics_process(delta: float) -> void:
 	if not is_alive:

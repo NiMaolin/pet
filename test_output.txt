@@ -1,0 +1,78 @@
+=== STDOUT ===
+Godot Engine v4.6.1.stable.official.14d19694e - https://godotengine.org
+
+✅ 素材已存在，跳过生成
+=== 主菜单加载 ===
+✅ 玩家已初始化（水墨风格）
+✅ 玩家已初始化
+=== 游戏世界加载 ===
+生成敌人: 翼龙 (HP: 60, 攻击: 30)
+  贴图: res://assets/ink/enemy_velociraptor.png
+生成敌人: 翼龙 (HP: 60, 攻击: 30)
+  贴图: res://assets/ink/enemy_velociraptor.png
+生成敌人: 迅猛龙 (HP: 80, 攻击: 25)
+  贴图: res://assets/ink/enemy_velociraptor.png
+✅ 地图生成完成: 5 个物资点, 3 个敌人, 1 个撤离点
+
+=== STDERR ===
+WARNING: INTEG_TEST: Start
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/integration_test.gd:4)
+WARNING: INTEG_TEST: 1 Load world
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:12)
+WARNING: INTEG_TEST: World=GameWorld
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:17)
+WARNING: INTEG_TEST: 2 Find loot
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:19)
+WARNING: INTEG_TEST: Spots=5
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:21)
+WARNING: INTEG_TEST: Loot=3
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:30)
+WARNING: INTEG_TEST: 3 Open UI
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:32)
+WARNING: INTEG_TEST: 3 OK
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:42)
+WARNING: INTEG_TEST: 4 Wait
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:43)
+WARNING: INTEG_TEST: L=3 B=0
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:45)
+WARNING: INTEG_TEST: 5 Click
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:47)
+WARNING: INTEG_TEST: Pos=(200.0, 90.0)
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:53)
+WARNING: INTEG_TEST: After L=3 B=0
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:58)
+WARNING: INTEG_TEST: DONE check result
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/integration_test.gd:63)
+WARNING: INTEG_TEST: RESULT=PASS
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] done (res://scripts/integration_test.gd:81)
+       [1] _run (res://scripts/integration_test.gd:65)

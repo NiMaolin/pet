@@ -1,0 +1,13 @@
+﻿=== Simplified Auto Test ===
+
+1. Test script created: D:\youxi\soudache\scripts\auto_test.gd
+2. Added AutoTest to project.godot
+3. Running Godot...
+--------------------------------------------------
+
+[����: 'gbk' codec can't encode character '\u2705' in position 77: illegal multibyte sequence]
+
+4. Restored project.godot
+5. Cleaned up test script
+
+Done.

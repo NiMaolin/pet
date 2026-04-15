@@ -1,0 +1,10 @@
+准备界面: PrepScreen
+Save按钮: 找到
+存档对话框可见: true
+MainMenu按钮: 找到
+返回后场景: MainMenu
+游戏世界: GameWorld
+撤离点数量: 1
+玩家移到撤离点: (350.0, 650.0)
+撤离后场景: ExtractSuccess
+截图已保存

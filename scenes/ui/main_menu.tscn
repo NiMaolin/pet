@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://do2tffsyviudg"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" uid="uid://w1erhpwnub02" path="res://scripts/ui/main_menu.gd" id="1_menu"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=550065700]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,16 +11,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=2063801199]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 62.0
+offset_top = 5.0
+offset_right = 62.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.2, 1)
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=2047866970]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -34,7 +38,7 @@ text = "宠物搜打撤
 Pet Extraction"
 horizontal_alignment = 1
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=211730672]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,19 +52,19 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=555531844]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="NewGame" type="Button" parent="Panel/VBox"]
+[node name="NewGame" type="Button" parent="Panel/VBox" unique_id=1554826029]
 layout_mode = 2
 text = "开始游戏"
 
-[node name="LoadGame" type="Button" parent="Panel/VBox"]
+[node name="LoadGame" type="Button" parent="Panel/VBox" unique_id=2044485882]
 layout_mode = 2
 text = "读取存档"
 
-[node name="Quit" type="Button" parent="Panel/VBox"]
+[node name="Quit" type="Button" parent="Panel/VBox" unique_id=570420708]
 layout_mode = 2
 text = "退出游戏"
 

@@ -205,10 +205,13 @@ func _refresh_loot() -> void:
 			loot_grid.add_child(bg)
 	
 	# 绘制物品 - 按原始数组顺序（绝不排序！），用 row/col 定位
-	for item in loot_items:
+	for idx in range(loot_items.size()):
+		var item = loot_items[idx]
 		if item.get("row", -1) < 0:
 			continue  # 跳过已被拾取的物品
-		var slot = _make_item_slot(item, "loot")
+		# 判断这个物品是否正在被搜索
+		var is_searching_this = is_searching and idx == search_index
+		var slot = _make_item_slot(item, "loot", is_searching_this)
 		slot.position = Vector2(item["col"] * CELL_SIZE, item["row"] * CELL_SIZE)
 		loot_grid.add_child(slot)
 
@@ -237,7 +240,7 @@ func _refresh_bag() -> void:
 ##  物品槽位绘制（纯单格版）
 ## ════════════════════════════════════════════════
 
-func _make_item_slot(item: Dictionary, source: String) -> Control:
+func _make_item_slot(item: Dictionary, source: String, is_currently_searching: bool = false) -> Control:
 	"""创建一个物品槽位节点（纯单格，40x40）"""
 	var container = Control.new()
 	container.custom_minimum_size = Vector2(CELL_SIZE, CELL_SIZE)
@@ -250,7 +253,33 @@ func _make_item_slot(item: Dictionary, source: String) -> Control:
 	var is_searched = item.get("searched", true) if source == "loot" else true
 	var rarity = item.get("rarity", ItemDB.get_item_rarity_str(item_id))
 	
-	if not is_searched:
+	if is_currently_searching:
+		# 正在搜索：红色背景 + 旋转三角形
+		var bg = ColorRect.new()
+		bg.size = Vector2(CELL_SIZE - 2, CELL_SIZE - 2)
+		bg.color = Color(0.9, 0.1, 0.1)  # 红色背景
+		bg.z_index = 0
+		container.add_child(bg)
+		
+		# 问号
+		var lbl = Label.new()
+		lbl.text = "?"
+		lbl.size = Vector2(CELL_SIZE, CELL_SIZE)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.add_theme_font_size_override("font_size", 16)
+		lbl.add_theme_color_override("font_color", Color(1, 1, 1))
+		lbl.z_index = 1
+		container.add_child(lbl)
+		
+		# 旋转三角形
+		var spinner = preload("res://scripts/ui/loading_spinner.gd").new()
+		spinner.size = Vector2(CELL_SIZE - 8, CELL_SIZE - 8)
+		spinner.position = Vector2(4, 4)
+		spinner.z_index = 2
+		spinner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		container.add_child(spinner)
+	elif not is_searched:
 		# 未搜索：显示问号占位符
 		var bg = ColorRect.new()
 		bg.size = Vector2(CELL_SIZE - 2, CELL_SIZE - 2)

@@ -1,0 +1,49 @@
+[20:26:04] ============================================================
+[20:26:04] Grid System v2 Test Start
+[20:26:04] ============================================================
+[20:26:27] ============================================================
+[20:26:27] Grid System v2 Test Start
+[20:26:27] ============================================================
+[20:26:29] Godot started PID=2808 with --grid-test
+[20:26:29] Window found: 5705648
+[20:27:20] ============================================================
+[20:27:20] Grid System v2 Test Start
+[20:27:20] ============================================================
+[20:27:22] Godot started PID=52380 with --grid-test
+[20:27:23] Window found: 3871684
+[20:27:35] Screenshot: 01_after_enter_world.png (1024x576)
+[20:27:35] Step: Entered game world
+[20:28:19] ============================================================
+[20:28:19] Grid System v2 Test Start
+[20:28:19] ============================================================
+[20:28:21] Godot started PID=36332 with --grid-test
+[20:28:21] Window found: 3871684
+[20:28:33] Screenshot: 01_after_enter_world.png (1x1)
+[20:28:33] Step: Entered game world
+[20:28:48] Screenshot: 02_loot_box_opened.png (1x1)
+[20:28:48] Step: Loot box opened & searching
+[20:28:56] Screenshot: 03_after_reopen.png (1x1)
+[20:28:56] Step: After close & reopen
+[20:29:08] Screenshot: 04_final_result.png (1x1)
+[20:29:08] Step: Final verification complete
+[20:29:08] 
+[20:29:08] ============================================================
+[20:29:08] TEST COMPLETE - Check screenshots and verify:
+[20:29:08]   Screenshots saved to: D:\youxi\soudache\_test_grid_screenshots
+[20:29:08]   1. Screenshot 02: Should show loot box with items
+[20:29:08]   2. Screenshot 04: Should show '完成' not '搜索中...'
+[20:29:08]   3. Items should be visible with names and rarity borders
+[20:29:08]   4. Bag should have at least 1 picked item
+[20:29:08] ============================================================
+[20:34:26] Game process ended
+[20:42:50] ============================================================
+[20:42:50] Grid System v2 Test Start
+[20:42:50] ============================================================
+[20:42:52] Godot started PID=58716 with --grid-test
+[20:42:52] Window found: 15993488
+[20:43:04] Screenshot: 01_after_enter_world.png (1024x576)
+[20:43:04] Step: Entered game world
+[20:43:19] Screenshot: 02_loot_box_opened.png (1024x576)
+[20:43:19] Step: Loot box opened & searching
+[20:43:27] Screenshot: 03_after_reopen.png (1024x576)
+[20:43:27] Step: After close & reopen

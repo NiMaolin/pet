@@ -84,7 +84,7 @@
 ├── 宠物蛋（Pet Egg）
 │   └── 不可堆叠
 └── 钥匙/货币（Key/Currency）
-    └── 特殊处理
+	└── 特殊处理
 ```
 
 ### 2.3 背包界面设计
@@ -141,18 +141,18 @@
 ```gdscript
 # 技能定义
 {
-    "id": "skill_001",
-    "name": "利爪挥击",
-    "icon": "skill_icon_001.png",
-    "type": "melee",           # melee/ranged/buff/debuff/heal
-    "damage": 50,              # 基础伤害
-    "range": 80,               # 施放范围（远程技能有效）
-    "radius": 0,               # AOE半径（0为单体）
-    "cooldown": 3.0,           # 冷却时间（秒）
-    "cost": 0,                 # 能量/法力消耗
-    "duration": 0,             # 持续时间（buff/debuff有效）
-    "effects": [],             # 附加效果列表
-    "description": "挥动利爪对目标造成伤害"
+	"id": "skill_001",
+	"name": "利爪挥击",
+	"icon": "skill_icon_001.png",
+	"type": "melee",           # melee/ranged/buff/debuff/heal
+	"damage": 50,              # 基础伤害
+	"range": 80,               # 施放范围（远程技能有效）
+	"radius": 0,               # AOE半径（0为单体）
+	"cooldown": 3.0,           # 冷却时间（秒）
+	"cost": 0,                 # 能量/法力消耗
+	"duration": 0,             # 持续时间（buff/debuff有效）
+	"effects": [],             # 附加效果列表
+	"description": "挥动利爪对目标造成伤害"
 }
 ```
 
@@ -207,14 +207,14 @@
 │              巡逻状态                   │
 │    （随机移动，保持在出生点附近）        │
 └──────────────┬──────────────────────────┘
-               │ 发现玩家
-               ▼
+			   │ 发现玩家
+			   ▼
 ┌─────────────────────────────────────────┐
 │              追击状态                   │
 │    （向玩家移动，进入攻击范围）          │
 └──────────────┬──────────────────────────┘
-               │ 进入攻击范围
-               ▼
+			   │ 进入攻击范围
+			   ▼
 ┌─────────────────────────────────────────┐
 │              战斗状态                   │
 │  ┌─────────────────────────────────┐   │
@@ -222,8 +222,8 @@
 │  │  （根据AI优先级和冷却选择）      │   │
 │  └─────────────────────────────────┘   │
 └──────────────┬──────────────────────────┘
-               │ 玩家死亡/逃离/消失
-               ▼
+			   │ 玩家死亡/逃离/消失
+			   ▼
 ┌─────────────────────────────────────────┐
 │              返回状态                   │
 │    （返回巡逻/追击状态）                 │
@@ -309,23 +309,23 @@
 ```gdscript
 # 伪代码：A*路径验证
 func validate_extraction_path(start: Vector2, end: Vector2) -> bool:
-    # 1. 使用A*算法搜索路径
-    path = a_star_search(start, end, walkable_tiles)
-    
-    # 2. 路径必须存在
-    if path.is_empty():
-        return false
-    
-    # 3. 路径长度不能超过阈值
-    if path.length() > max_path_length:
-        return false
-    
-    # 4. 路径上不能有无法通行的地形
-    for tile in path:
-        if not is_walkable(tile):
-            return false
-    
-    return true
+	# 1. 使用A*算法搜索路径
+	path = a_star_search(start, end, walkable_tiles)
+	
+	# 2. 路径必须存在
+	if path.is_empty():
+		return false
+	
+	# 3. 路径长度不能超过阈值
+	if path.length() > max_path_length:
+		return false
+	
+	# 4. 路径上不能有无法通行的地形
+	for tile in path:
+		if not is_walkable(tile):
+			return false
+	
+	return true
 ```
 
 ### 4.2 撤离系统

@@ -1,0 +1,57 @@
+SCRIPT ERROR: Parse Error: Unexpected identifier "def" in class body.
+   at: GDScript::reload (res://scripts/systems/game_data.gd:203)
+ERROR: Failed to load script "res://scripts/systems/game_data.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript.cpp:2907)
+ERROR: Failed to instantiate an autoload, script 'res://scripts/systems/game_data.gd' does not inherit from 'Node'.
+   at: start (main/main.cpp:4407)
+ERROR: Attempt to open script 'res://scripts/flow_test.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1127)
+ERROR: Failed loading resource: res://scripts/flow_test.gd.
+   at: _load (core/io/resource_loader.cpp:343)
+ERROR: Failed to instantiate an autoload, can't load from path: res://scripts/flow_test.gd.
+   at: start (main/main.cpp:4401)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "_world" variable because the value is "null".
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:142)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "_player" variable because the value is "null".
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:143)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "_loot_ui" variable because the value is "null".
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:144)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "_loot_spot" variable because the value is "null".
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:145)
+SCRIPT ERROR: Parse Error: Identifier "PROCESS_MODE_ALWAYS_VISIBLE" not declared in the current scope.
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:28)
+SCRIPT ERROR: Parse Error: Invalid operands to operator *, String and int.
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:93)
+SCRIPT ERROR: Parse Error: Invalid operands to operator *, String and int.
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:341)
+SCRIPT ERROR: Parse Error: Invalid operands to operator *, String and int.
+   at: GDScript::reload (res://scripts/systems/auto_runner.gd:355)
+ERROR: Failed to load script "res://scripts/systems/auto_runner.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript.cpp:2907)
+ERROR: Failed to instantiate an autoload, script 'res://scripts/systems/auto_runner.gd' does not inherit from 'Node'.
+   at: start (main/main.cpp:4407)
+SCRIPT ERROR: Invalid assignment of property or key 'equipped_pet_id' with value of type 'int' on a base object of type 'Nil'.
+   at: start_new_game (res://scripts/systems/save_system.gd:117)
+   GDScript backtrace (most recent call first):
+       [0] start_new_game (res://scripts/systems/save_system.gd:117)
+       [1] _on_new_game_pressed (res://scripts/ui/main_menu.gd:5)
+       [2] run_tests (res://scripts/auto_test.gd:19)
+SCRIPT ERROR: Invalid access to property or key 'collected_pets' on a base object of type 'Nil'.
+   at: _update_info (res://scripts/ui/prep_screen.gd:38)
+   GDScript backtrace (most recent call first):
+       [0] _update_info (res://scripts/ui/prep_screen.gd:38)
+       [1] _ready (res://scripts/ui/prep_screen.gd:17)
+SCRIPT ERROR: Invalid assignment of property or key 'current_map' with value of type 'String' on a base object of type 'Nil'.
+   at: _select_map (res://scripts/ui/map_select.gd:10)
+   GDScript backtrace (most recent call first):
+       [0] _select_map (res://scripts/ui/map_select.gd:10)
+       [1] _ready (res://scripts/ui/map_select.gd:7)
+SCRIPT ERROR: Invalid assignment of property or key 'is_in_game' with value of type 'bool' on a base object of type 'Nil'.
+   at: _on_start_pressed (res://scripts/ui/map_select.gd:15)
+   GDScript backtrace (most recent call first):
+       [0] _on_start_pressed (res://scripts/ui/map_select.gd:15)
+       [1] run_tests (res://scripts/auto_test.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'player_health' on a base object of type 'Nil'.
+   at: run_tests (res://scripts/auto_test.gd:40)
+   GDScript backtrace (most recent call first):
+       [0] run_tests (res://scripts/auto_test.gd:40)

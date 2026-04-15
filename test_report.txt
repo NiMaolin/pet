@@ -1,0 +1,20 @@
+=== 真实点击测试开始 ===
+当前场景: MainMenu
+找到按钮: NewGame
+模拟点击: NewGame (emit_signal)
+点击后场景: PrepScreen
+✅ 主菜单 → 准备界面 成功！
+找到按钮: Prepare
+模拟点击: Prepare (emit_signal)
+点击后场景: MapSelect
+✅ 准备界面 → 地图选择 成功！
+找到按钮: Start
+模拟点击: Start (emit_signal)
+点击后场景: GameWorld
+✅ 地图选择 → 游戏世界 成功！
+
+=== 游戏世界检查 ===
+✅ 玩家存在: (0.0, 300.0)
+物资箱数量: 5
+敌人数量: 3
+✅ 截图保存: D:\youxi\soudache\test_screenshot.png

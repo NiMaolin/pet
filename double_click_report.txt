@@ -1,0 +1,14 @@
+场景: GameWorld
+物资箱数量: 5
+第一个物资箱: @Area2D@266 @ (0.0, 100.0)
+玩家位置: (0.0, 300.0)
+✅ 调用 interact()
+LootUI 可见: true
+格子节点: @Control@315
+  mouse_filter: 0
+  信号连接数: 0
+
+=== 尝试双击 ===
+  创建事件: double_click=true
+背包物品数: 1
+✅ 截图已保存
