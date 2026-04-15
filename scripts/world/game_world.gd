@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $Player
 @onready var loot_ui: CanvasLayer = $LootUI
-@onready var skill_hud: CanvasLayer = $SkillHUD
+var skill_hud: CanvasLayer = null  # Optional, set if SkillHUD child exists
 @onready var health_label: Label          = $HUD/HealthLabel
 @onready var pet_label: Label             = $HUD/PetLabel
 @onready var inventory_label: Label       = $HUD/InventoryLabel
@@ -32,9 +32,12 @@ const TERRAIN_POISON = 5
 const TERRAIN_BUILDING = 6
 
 func _ready() -> void:
-	print("=== 游戏世界加载 ===")
+	print("=== Game World Loaded ===")
 	_generate_map()
-	_validate_paths()  # 验证路径
+	# Try to find SkillHUD (optional node)
+	skill_hud = get_node_or_null("SkillHUD")
+	if not skill_hud:
+		push_warning("SkillHUD not found in game_world - skill UI disabled")
 	_update_hud()
 	loot_ui.closed.connect(_on_loot_ui_closed)
 	# 血量变化时实时更新 HUD

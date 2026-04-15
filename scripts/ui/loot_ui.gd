@@ -675,13 +675,13 @@ func _cancel_drag() -> void:
 	
 	if is_instance_valid(drag_source_slot):
 		drag_source_slot.modulate = Color(1, 1, 1, 1)
-		drag_source_slot = None
+		drag_source_slot = null
 
 func _clear_preview() -> void:
 	"""清除预览节点"""
 	if preview_node:
 		preview_node.queue_free()
-		preview_node = None
+		preview_node = null
 
 func _update_title() -> void:
 	"""更新物资箱标题"""
